@@ -1,4 +1,5 @@
 import os
+from requests import get as http_get
 
 
 def read_text():
@@ -6,7 +7,14 @@ def read_text():
     file = r"%s\resources\movie_quotes.txt" % actual_path
     quotes = open(file)
     contents_of_file = quotes.read()
-    print(contents_of_file)
     quotes.close()
+    return contents_of_file
 
-read_text()
+
+def check_profanity(text_to_check):
+    connection = http_get(
+        'http://lovewww.wdylike.appspot.com/?q={0}'.format(text_to_check)
+    )
+    return connection.text
+
+assert check_profanity(read_text()) == 'false', "This contains a Profanity X-("
