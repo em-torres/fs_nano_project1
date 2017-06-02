@@ -12,9 +12,7 @@ def read_text():
 
 
 def check_profanity(text_to_check):
-    connection = http_get(
-        'http://lovewww.wdylike.appspot.com/?q={0}'.format(text_to_check)
-    )
+    connection = http_get('http://lovewww.wdylike.appspot.com/?q={0}'.format(text_to_check))
     return connection.text
 
 assert check_profanity(read_text()) == 'false', "This contains a Profanity X-("
